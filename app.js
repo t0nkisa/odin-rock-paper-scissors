@@ -15,15 +15,18 @@ function onlyFirstLetterToUpperCase(string){
 }
 
 function playRound(playerSelection, computerSelection) {
-    const playerSelection = firstLetterToUpperCase(playerSelection);
-    const computerSelection = firstLetterToUpperCase(computerSelection);
+    playerSelection = onlyFirstLetterToUpperCase(playerSelection);
+    computerSelection = onlyFirstLetterToUpperCase(computerSelection);
+
+    return calcRoundResults(playerSelection, computerSelection);
+}
+function calcRoundResults(playerSelection, computerSelection) {
     let result = "";
     if (playerSelection === "Rock") {
         if (computerSelection === "Paper") {
             result = `You lose! ${playerSelection} loses to ${computerSelection}`;
         } else if (computerSelection === "Scissors") {
             result = `You win! ${playerSelection} beats ${computerSelection}`;
-            gamesPlayerWon++;
         } else {
             result = `You draw! ${playerSelection} draws to ${computerSelection}`;
         }
@@ -34,12 +37,10 @@ function playRound(playerSelection, computerSelection) {
             result = `You lose! ${playerSelection} loses to ${computerSelection}`;
         } else {
             result = `You win! ${playerSelection} beats ${computerSelection}`;
-            gamesPlayerWon++;
         }
     } else {
         if (computerSelection === "Paper") {
             result = `You win! ${playerSelection} beats ${computerSelection}`;
-            gamesPlayerWon++;
         } else if (computerSelection === "Scissors") {
             result = `You draw! ${playerSelection} draws to ${computerSelection}`;
         } else {
@@ -49,9 +50,9 @@ function playRound(playerSelection, computerSelection) {
     return result;
 }
 
-function game() {
-    let gamesPlayerWon = 0;
-    for (let i = 0; i < 5; i++) {
+function game(numberOfRounds) {
+    for (let i = 0; i < numberOfRounds; i++) {
+        console.log(`Round ${i + 1}`)
         const playerSelection = prompt("Your choice: Rock, paper or scissors?");
         const computerSelection = getComputerChoice();
 
@@ -59,3 +60,4 @@ function game() {
     }
 }
 
+game(5);
