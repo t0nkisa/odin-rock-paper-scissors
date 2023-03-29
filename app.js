@@ -24,39 +24,65 @@ function calcRoundResults(playerSelection, computerSelection) {
     let result = "";
     if (playerSelection === "Rock") {
         if (computerSelection === "Paper") {
-            result = `You lose! ${playerSelection} loses to ${computerSelection}`;
+            console.log(`You lose! ${playerSelection} loses to ${computerSelection}`);
+            result = "lost";
         } else if (computerSelection === "Scissors") {
-            result = `You win! ${playerSelection} beats ${computerSelection}`;
+            console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+            result = "won";
         } else {
-            result = `You draw! ${playerSelection} draws to ${computerSelection}`;
+            console.log(`You draw! ${playerSelection} draws to ${computerSelection}`);
+            result = "drawn";
         }
     } else if (playerSelection === "Paper") {
         if (computerSelection === "Paper") {
-            result = `You draw! ${playerSelection} draws to ${computerSelection}`;
+            console.log(`You draw! ${playerSelection} draws to ${computerSelection}`);
+            result = "drawn";
         } else if (computerSelection === "Scissors") {
-            result = `You lose! ${playerSelection} loses to ${computerSelection}`;
+            console.log(`You lose! ${playerSelection} loses to ${computerSelection}`);
+            result = "lost";
         } else {
-            result = `You win! ${playerSelection} beats ${computerSelection}`;
+            console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+            result = "won";
         }
     } else {
         if (computerSelection === "Paper") {
-            result = `You win! ${playerSelection} beats ${computerSelection}`;
+            console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+            result = "won";
         } else if (computerSelection === "Scissors") {
-            result = `You draw! ${playerSelection} draws to ${computerSelection}`;
+            console.log(`You draw! ${playerSelection} draws to ${computerSelection}`);
+            result = "drawn";
         } else {
-            result = `You lose! ${playerSelection} loses to ${computerSelection}`;
+            console.log(`You lose! ${playerSelection} loses to ${computerSelection}`);
+            result = "lost";
         }
     }
     return result;
 }
 
 function game(numberOfRounds) {
+    let gamesWon = 0;
+    let gamesLost = 0;
+    let gamesDrawn = 0;
     for (let i = 0; i < numberOfRounds; i++) {
         console.log(`Round ${i + 1}`)
         const playerSelection = prompt("Your choice: Rock, paper or scissors?");
         const computerSelection = getComputerChoice();
 
-        console.log(playRound(playerSelection, computerSelection));
+        let result = playRound(playerSelection, computerSelection);
+        if (result === "won") {
+            gamesWon++;
+        } else if (result === "lost") {
+            gamesLost++;
+        } else {
+            gamesDrawn++;
+        }
+    }
+    if (gamesWon > gamesLost) {
+        console.log("You've won!")
+    } else if (gamesWon < gamesLost) {
+        console.log("You've lost!");
+    } else {
+        console.log("You've drawn!")
     }
 }
 
